@@ -1,5 +1,17 @@
 # vim-cpp-fix-includes
 
+## What it does
+
+For now plugin does one VERY simple thing:
+
+* Finds C++ identifier under cursor (i.e. `std::sort`)
+* Finds mapping in the internal dictionary from this identifier to appropriate include (i.e. `algorithm`)
+* Inserts the include directive right after all include directives at the beginning of file
+
+If you want to make some use of it just add necessary mappings to the plugin file.
+
+And some mapping for the plugin command, like `nnoremap <Leader>m :FixCppInclude<CR>`.
+
 ## Requirements
 
 `python` support in Vim is required as plugin is written in Python
@@ -19,18 +31,6 @@ Use your plugin manager of choice.
 - [vim-plug](https://github.com/junegunn/vim-plug)
   - Add `Plug 'https://github.com/elricbk/vim-cpp-fix-includes'` to .vimrc
   - Run `:PlugInstall`
-
-## What it does
-
-For now plugin does one VERY simple thing:
-
-* Finds C++ identifier under cursor (i.e. `std::sort`)
-* Finds mapping in the internal dictionary from this identifier to appropriate include (i.e. `algorithm`)
-* Inserts the include directive right after all include directives at the beginning of file
-
-If you want to make some use of it just add necessary mappings to the plugin file.
-
-And some mapping for the plugin command, like `nnoremap <Leader>m :FixCppInclude<CR>`.
 
 ## TODO
 
