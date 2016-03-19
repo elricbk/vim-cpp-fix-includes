@@ -8,13 +8,12 @@ python sys.path.append(vim.eval('expand("<sfile>:h")'))
 " --------------------------------
 "  Function(s)
 " --------------------------------
-function! TemplateExample()
+function! FixCppInclude()
 python << endOfPython
 
-from vim_cpp_fix_includes import vim_cpp_fix_includes_example
+from vim_cpp_fix_includes import fix_include_for_word_under_cursor
 
-for n in range(5):
-    print(vim_cpp_fix_includes_example())
+fix_include_for_word_under_cursor()
 
 endOfPython
 endfunction
@@ -22,4 +21,4 @@ endfunction
 " --------------------------------
 "  Expose our commands to the user
 " --------------------------------
-command! Example call TemplateExample()
+command! FixCppInclude call FixCppInclude()
