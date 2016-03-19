@@ -1,5 +1,9 @@
 # vim-cpp-fix-includes
 
+## Requirements
+
+`python` support in Vim is required as plugin is written in Python
+
 ## Installation
 
 Use your plugin manager of choice.
