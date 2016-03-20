@@ -90,7 +90,17 @@ def _make_example_python_buffer():
     ]
     _create_new_buffer("Example_buffer", "cpp", contents)
 
+def _load_additional_mappings():
+    ADDITIONAL_MAPPINGS_KEY = "g:fix_includes_additional_mappings"
+    eval_value = int(vim.eval('exists("%s")' % ADDITIONAL_MAPPINGS_KEY))
+    if not eval_value: return {}
+    actual_value = vim.eval(ADDITIONAL_MAPPINGS_KEY)
+    mapping_list = [l.strip().split('\t') for l in actual_value.split('\n')]
+    return dict(map(str.strip, t) for t in mapping_list if len(t) == 2)
+
 def fix_include_for_word_under_cursor():
+    _NAME_TO_INCLUDE.update(_load_additional_mappings())
+
     b = vim.current.buffer
     (row, col) = vim.current.window.cursor
     word = _extract_word(b[row - 1], col)
