@@ -1,4 +1,4 @@
-import vim
+vim = None
 
 _NAME_TO_INCLUDE = {
     'std::string': 'string',
@@ -97,6 +97,10 @@ def _load_additional_mappings():
     actual_value = vim.eval(ADDITIONAL_MAPPINGS_KEY)
     mapping_list = [l.strip().split('\t') for l in actual_value.split('\n')]
     return dict(map(str.strip, t) for t in mapping_list if len(t) == 2)
+
+def initialize(vim_ext):
+    global vim
+    vim = vim_ext
 
 def fix_include_for_word_under_cursor():
     _NAME_TO_INCLUDE.update(_load_additional_mappings())

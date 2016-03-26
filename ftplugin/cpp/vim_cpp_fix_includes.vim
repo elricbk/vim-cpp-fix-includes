@@ -11,9 +11,10 @@ python sys.path.append(vim.eval('expand("<sfile>:h")'))
 function! FixCppInclude()
 python << endOfPython
 
-from vim_cpp_fix_includes import fix_include_for_word_under_cursor
+import vim_cpp_fix_includes
 
-fix_include_for_word_under_cursor()
+vim_cpp_fix_includes.initialize(vim)
+vim_cpp_fix_includes.fix_include_for_word_under_cursor()
 
 endOfPython
 endfunction
