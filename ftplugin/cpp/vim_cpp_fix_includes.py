@@ -32,19 +32,19 @@ def _get_visual_selection():
     (lnum1, col1) = b.mark('<')
     (lnum2, col2) = b.mark('>')
     if lnum1 != lnum2:
-    	return None
-    return b[lnum1 - 1][col1:col2 + 1] 
+        return None
+    return b[lnum1 - 1][col1:col2 + 1]
 
 def _extract_word(l, col):
     is_name_part = lambda c: c == ':' or c == '_' or c.isalnum()
     if col < 0 or col > len(l) - 1 or not is_name_part(l[col]):
-    	return None
+        return None
     i = col - 1
     while i >= 0 and is_name_part(l[i]):
-    	i -= 1
+        i -= 1
     j = col + 1
     while j < len(l) and is_name_part(l[j]):
-    	j += 1
+        j += 1
     return l[i + 1:j]
 
 def _find_include_range(buf):
@@ -106,8 +106,8 @@ def fix_include_for_word_under_cursor():
     word = _extract_word(b[row - 1], col)
 
     if word is None:
-    	print "Can't find identifier under cursor"
-    	return
+        print "Can't find identifier under cursor"
+        return
 
     if word in _NAME_TO_INCLUDE:
         start, end = _find_include_range(b)
@@ -116,4 +116,4 @@ def fix_include_for_word_under_cursor():
         vim.command('call append(%d, "%s") | redraw' % (insert_point, line))
         print "<{}> included".format(_NAME_TO_INCLUDE[word])
     else:
-    	print "No mapping for '{}'".format(word)
+        print "No mapping for '{}'".format(word)
