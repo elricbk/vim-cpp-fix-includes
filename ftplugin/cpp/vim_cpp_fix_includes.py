@@ -1,5 +1,7 @@
 vim = None
 
+INCLUDE_MARKER = '#include'
+
 _NAME_TO_INCLUDE = {
     'std::string': 'string',
     'std::vector': 'vector',
@@ -47,21 +49,21 @@ def _extract_word(l, col):
         j += 1
     return l[i + 1:j]
 
-def _find_include_range(buf):
+def find_include_range(buf):
     start = None
     end = None
     is_empty = lambda s: len(s.strip()) == 0
-    is_include = lambda s: s.strip().startswith('#include')
+    is_include = lambda s: s.strip().startswith(INCLUDE_MARKER)
     for i, l in enumerate(buf):
         if is_empty(l): continue
         if start is None and is_include(l):
             start = i
         if not is_include(l) and start is not None:
-            end = i - 1
+            end = i
             break
     if start is not None and end is None:
-        end = i
-    while end > start and is_empty(buf[end]):
+        end = i + 1
+    while end > start and len(buf[end - 1].strip()) == 0:
         end -= 1
     return (start, end)
 
@@ -114,8 +116,8 @@ def fix_include_for_word_under_cursor():
         return
 
     if word in _NAME_TO_INCLUDE:
-        start, end = _find_include_range(b)
-        insert_point = end + 1 if end is not None else 0
+        start, end = find_include_range(b)
+        insert_point = end if end is not None else 0
         line = '#include <{}>'.format(_NAME_TO_INCLUDE[word])
         vim.command('call append(%d, "%s") | redraw' % (insert_point, line))
         print "<{}> included".format(_NAME_TO_INCLUDE[word])
