@@ -37,7 +37,7 @@ def _get_visual_selection():
         return None
     return b[lnum1 - 1][col1:col2 + 1]
 
-def _extract_word(l, col):
+def extract_cpp_identifier(l, col):
     is_name_part = lambda c: c == ':' or c == '_' or c.isalnum()
     if col < 0 or col > len(l) - 1 or not is_name_part(l[col]):
         return None
@@ -109,7 +109,7 @@ def fix_include_for_word_under_cursor():
 
     b = vim.current.buffer
     (row, col) = vim.current.window.cursor
-    word = _extract_word(b[row - 1], col)
+    word = extract_cpp_identifier(b[row - 1], col)
 
     if word is None:
         print "Can't find identifier under cursor"

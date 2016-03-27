@@ -41,3 +41,37 @@ class FindIncludeRangeTest(unittest.TestCase):
 
         self.assertIsNone(start)
         self.assertIsNone(end)
+        
+class ExtractCppIdentifierTests(unittest.TestCase):
+    def test_given_single_word_idetifier_extracts_it(self):
+        self.assertEqual(
+            sut.extract_cpp_identifier('test', 0),
+            'test'
+        )
+
+    def test_given_identifier_with_underscore_extracts_it(self):
+        self.assertEqual(
+            sut.extract_cpp_identifier('starts_with(s1, s2);', 0),
+            'starts_with'
+        )
+
+    def test_given_identifier_with_namespace_extracts_it(self):
+        self.assertEqual(
+            sut.extract_cpp_identifier('std::string test;', 4),
+            'std::string'
+        )
+
+    def test_given_space_at_cursor_returns_none(self):
+        self.assertIsNone(
+            sut.extract_cpp_identifier('s1 test;', 2)
+        )
+
+    def test_given_column_less_than_zero_returns_none(self):
+        self.assertIsNone(
+            sut.extract_cpp_identifier('test', -1)
+        )
+
+    def test_given_too_big_column_returns_none(self):
+        self.assertIsNone(
+            sut.extract_cpp_identifier('test', 4)
+        )
