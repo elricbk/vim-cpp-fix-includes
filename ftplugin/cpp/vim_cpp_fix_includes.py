@@ -104,7 +104,7 @@ def initialize(vim_ext):
     global vim
     vim = vim_ext
 
-def fix_include_for_word_under_cursor():
+def fix_include_for_word_under_cursor(notify):
     _NAME_TO_INCLUDE.update(_load_additional_mappings())
 
     b = vim.current.buffer
@@ -112,7 +112,7 @@ def fix_include_for_word_under_cursor():
     word = extract_cpp_identifier(b[row - 1], col)
 
     if word is None:
-        print "Can't find identifier under cursor"
+        notify("Can't find identifier under cursor")
         return
 
     if word in _NAME_TO_INCLUDE:
@@ -120,6 +120,6 @@ def fix_include_for_word_under_cursor():
         insert_point = end if end is not None else 0
         line = '#include <{}>'.format(_NAME_TO_INCLUDE[word])
         vim.command('call append(%d, "%s") | redraw' % (insert_point, line))
-        print "<{}> included".format(_NAME_TO_INCLUDE[word])
+        notify("<{}> included".format(_NAME_TO_INCLUDE[word]))
     else:
-        print "No mapping for '{}'".format(word)
+        notify("No mapping for '{}'".format(word))

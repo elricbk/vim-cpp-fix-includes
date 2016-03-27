@@ -13,8 +13,10 @@ python << endOfPython
 
 import vim_cpp_fix_includes
 
+def notify(s): print(s)
+
 vim_cpp_fix_includes.initialize(vim)
-vim_cpp_fix_includes.fix_include_for_word_under_cursor()
+vim_cpp_fix_includes.fix_include_for_word_under_cursor(notify)
 
 endOfPython
 endfunction
