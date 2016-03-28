@@ -24,7 +24,8 @@ Also you may want to add some key mapping for the plugin command, like `nnoremap
 
 ## Requirements
 
-`python` support in Vim is required as plugin is written in Python
+`python` support in Vim is required as plugin is written in Python. Also `mock`
+library is required to run plugin tests.
 
 ## Installation
 

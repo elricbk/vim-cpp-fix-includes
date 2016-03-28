@@ -1,5 +1,6 @@
 import unittest
 import vim_cpp_fix_includes as sut
+import mock
 
 class FindIncludeRangeTest(unittest.TestCase):
     def test_for_basic_case_returns_expected_result(self):
@@ -75,3 +76,37 @@ class ExtractCppIdentifierTests(unittest.TestCase):
         self.assertIsNone(
             sut.extract_cpp_identifier('test', 4)
         )
+
+class FixIncludeForWordUnderCursorTests(unittest.TestCase):
+    def setUp(self):
+        self.vim = mock.Mock()
+        self.vim.eval.return_value = 0
+        self.notify = mock.Mock()
+
+    def test_given_no_word_under_cursor_calls_notify_with_error_message(self):
+        self.vim.current.buffer = ['']
+        self.vim.current.window.cursor = (1, 0)
+        sut.initialize(self.vim)
+
+        sut.fix_include_for_word_under_cursor(self.notify)
+
+        self.notify.assert_called_with("Can't find identifier under cursor")
+
+    def test_given_unknown_word_calls_notify_with_error_message(self):
+        self.vim.current.buffer = ['test::me::please']
+        self.vim.current.window.cursor = (1, 0)
+        sut.initialize(self.vim)
+
+        sut.fix_include_for_word_under_cursor(self.notify)
+
+        self.notify.assert_called_with("No mapping for 'test::me::please'")
+
+    def test_given_known_word_calls_notify_with_success_message(self):
+        self.vim.current.buffer = ['std::string']
+        self.vim.current.window.cursor = (1, 0)
+        sut.initialize(self.vim)
+
+        sut.fix_include_for_word_under_cursor(self.notify)
+
+        self.notify.assert_called_with("<string> included")
+
