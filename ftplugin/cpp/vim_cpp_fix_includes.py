@@ -21,12 +21,16 @@ _NAME_TO_INCLUDE = {
     'int32_t': 'cstdint',
     'int64_t': 'cstdint',
     'std::sort': 'algorithm',
+    'std::min': 'algorithm',
+    'std::max': 'algorithm',
     'std::cout': 'iostream',
     'std::endl': 'iostream',
 
     'boost::optional': 'boost/optional/optional.hpp',
     'boost::none': 'boost/none.hpp',
     'boost::lexical_cast': 'boost/lexical_cast.hpp',
+    'BOOST_AUTO_TEST_SUITE': 'boost/test/unit_test.hpp',
+    'BOOST_AUTO_TEST_CASE': 'boost/test/unit_test.hpp',
 }
 
 def _get_visual_selection():
