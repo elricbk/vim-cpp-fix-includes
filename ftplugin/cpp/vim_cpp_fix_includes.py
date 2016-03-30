@@ -2,30 +2,95 @@ vim = None
 
 INCLUDE_MARKER = '#include'
 
-_NAME_TO_INCLUDE = {
-    'std::string': 'string',
-    'std::vector': 'vector',
-    'std::map': 'map',
-    'std::set': 'set',
-    'std::make_pair': 'utility',
-    'std::shared_ptr': 'memory',
-    'std::make_shared': 'memory',
-    'std::unique_ptr': 'memory',
-    'size_t': 'ctddef',
-    'uint8_t': 'cstdint',
-    'uint16_t': 'cstdint',
-    'uint32_t': 'cstdint',
-    'uint64_t': 'cstdint',
-    'int8_t': 'cstdint',
-    'int16_t': 'cstdint',
-    'int32_t': 'cstdint',
-    'int64_t': 'cstdint',
-    'std::sort': 'algorithm',
-    'std::min': 'algorithm',
-    'std::max': 'algorithm',
-    'std::cout': 'iostream',
-    'std::endl': 'iostream',
+_HEADER_TO_IDENTIFIER = {
+'algorithm': [
+    'all_of', 'any_of', 'none_of', 'find_if_not', 'copy_if', 'is_sorted',
+    'is_heap', 'adjacent_find', 'binary_search', 'copy', 'copy_backward',
+    'count', 'count_if', 'equal', 'equal_range', 'fill', 'find', 'find_end',
+     'find_first_of', 'find_if', 'for_each', 'generate', 'generate_n',
+    'includes', 'inplace_merge', 'is_heap', 'is_sorted', 'iter_swap',
+    'lexicographical_compare', 'lexicographical_compare_3way', 'lower_bound',
+    'make_heap', 'max', 'max_element', 'merge', 'min', 'min_element',
+    'mismatch', 'next_permutation', 'nth_element', 'partial_sort',
+    'partial_sort_copy', 'partition', 'pop_heap', 'prev_permutation',
+    'push_heap', 'random_sample', 'random_sample_n', 'random_shuffle', 'remove',
+    'remove_copy', 'remove_copy_if', 'remove_if', 'replace', 'replace_copy',
+    'replace_copy_if', 'replace_if', 'reverse', 'reverse_copy', 'rotate',
+    'rotate_copy', 'search', 'search_n', 'set_difference', 'set_intersection',
+    'set_symmetric_difference', 'set_union', 'sort', 'sort_heap',
+    'stable_partition', 'stable_sort', 'swap', 'swap_ranges', 'transform',
+    'unique', 'unique_copy', 'upper_bound'
+],
+'bitset': [ 'bitset' ],
+'cmath': [ 'fmod' ],
+'cstdio': [
+    'fflush', 'freopen', 'setbuf', 'setvbuf', 'fprintf', 'fscanf', 'printf',
+    'scanf', 'sprintf', 'sscanf', 'vfprintf', 'vprintf', 'vsprintf', 'fgetc',
+    'fgets', 'fputc', 'fputs', 'getc', 'getchar', 'gets', 'putc', 'putchar',
+    'puts', 'ungetc', 'fread', 'fwrite', 'fseek', 'ftell', 'rewind', 'feof',
+    'perror', 'EOF', 'FILE', 'fpos_t'
+],
+'cstdlib': [
+    'atof', 'atoi', 'atol', 'strtod', 'strtol', 'strtoul', 'rand', 'srand',
+    'abort', 'exit', 'qsort', 'abs', 'atexit', 'calloc', 'bsearch', 'div',
+    'free', 'malloc', 'getenv', 'labs', 'ldiv', 'system'
+],
+'cstring': [
+    'memcpy', 'memmove', 'strcpy', 'strncpy', 'strcat', 'strncat', 'memcmp',
+    'strcmp', 'strcoll', 'strncmp', 'strxfrm', 'memchr', 'strchr', 'strcspn',
+    'strpbrk', 'strrchr', 'strspn', 'strstr', 'strtok', 'memset', 'strerror',
+    'strlen'
+],
+'cstdint': [
+    'int8_t', 'int16_t', 'int32_t', 'int64_t', 'uint8_t', 'uint16_t',
+    'uint32_t', 'uint64_t'
+],
+'deque': [ 'deque' ],
+'exception': [
+    'exception', 'bad_exception', 'unexpected', 'uncaught_exception',
+    'terminate', 'set_unexpected', 'set_terminate', 'terminate_handler',
+    'unexpected_handler'
+],
+'fstream': [ 'ifstream', 'ofstream', 'fstream' ],
+'functional': [
+    'plus', 'minus', 'multiplies', 'hash', 'divides', 'modulus', 'negate',
+    'equal_to', 'not_equal_to', 'less', 'greater', 'less_equal',
+    'greater_equal', 'logical_and', 'logical_or', 'logical_not', 'binder1st',
+    'bind1st', 'binder2nd', 'bind2nd', 'ptr_fun', 'pointer_to_unary_function',
+    'pointer_to_binary_function', 'not1', 'unary_negate', 'binary_negate', 'not2',
+    'mem_fun', 'mem_fun_ref', 'mem_fun1', 'mem_fun1_ref'
+],
+'iomanip': [ 'setw', 'setfill', 'hex', 'setprecision' ],
+'iostream': [ 'cin', 'cerr', 'cout', 'istream', 'ostream', 'endl', 'flush' ],
+'iterator': [
+    'advance', 'distance', 'ostream_iterator', 'istream_iterator',
+    'front_insert_iterator', 'back_insert_iterator', 'front_inserter',
+    'back_inserter', 'insert_iterator', 'inserter', 'reverse_iterator',
+    'reverse_bidirectional_iterator'
+],
+'list': [ 'list' ],
+'map': [ 'map', 'multimap' ],
+'memory': [ 'unique_ptr', 'shared_ptr', 'weak_ptr', 'auto_ptr', 'make_shared' ],
+'numeric': [
+    'accumulate', 'adjacent_difference', 'inner_product', 'partial_sum', 'power'
+],
+'queue': [ 'queue', 'priority_queue' ],
+'set': [ 'set', 'multiset' ],
+'sstream': [ 'istringstream', 'ostringstream', 'stringstream' ],
+'stack': [ 'stack' ],
+'stdexcept': [
+    'domain_error', 'invaid_argument', 'length_error', 'out_of_range',
+    'overflow_error', 'range_error', 'underflow_error', 'runtime_error'
+],
+'string': [ 'string', 'basic_string', 'char_traits', 'getline' ],
+'tuple': [ 'make_tuple', 'tie', 'tuple', 'get' ],
+'utility': [ 'pair', 'make_pair', 'move', 'forward' ],
+'vector': [ 'vector', 'bit_vector' ],
+'unordered_map': [ 'unordered_map' ],
+'unordered_set': [ 'unordered_set' ],
+}
 
+_NAME_TO_INCLUDE = {
     'boost::optional': 'boost/optional/optional.hpp',
     'boost::none': 'boost/none.hpp',
     'boost::lexical_cast': 'boost/lexical_cast.hpp',
@@ -109,6 +174,10 @@ def initialize(vim_ext):
     vim = vim_ext
 
 def fix_include_for_word_under_cursor(notify):
+    for header, identifier_list in _HEADER_TO_IDENTIFIER.iteritems():
+        for i in identifier_list:
+            _NAME_TO_INCLUDE[i] = header
+            _NAME_TO_INCLUDE['std::' + i] = header
     _NAME_TO_INCLUDE.update(_load_additional_mappings())
 
     b = vim.current.buffer
