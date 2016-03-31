@@ -21,6 +21,7 @@ _HEADER_TO_IDENTIFIER = {
     'stable_partition', 'stable_sort', 'swap', 'swap_ranges', 'transform',
     'unique', 'unique_copy', 'upper_bound'
 ],
+'array': [ 'array' ],
 'bitset': [ 'bitset' ],
 'cmath': [ 'fmod' ],
 'cstdio': [
@@ -52,6 +53,7 @@ _HEADER_TO_IDENTIFIER = {
     'unexpected_handler'
 ],
 'fstream': [ 'ifstream', 'ofstream', 'fstream' ],
+'forward_list': [ 'forward_list' ],
 'functional': [
     'plus', 'minus', 'multiplies', 'hash', 'divides', 'modulus', 'negate',
     'equal_to', 'not_equal_to', 'less', 'greater', 'less_equal',
@@ -86,8 +88,8 @@ _HEADER_TO_IDENTIFIER = {
 'tuple': [ 'make_tuple', 'tie', 'tuple', 'get' ],
 'utility': [ 'pair', 'make_pair', 'move', 'forward' ],
 'vector': [ 'vector', 'bit_vector' ],
-'unordered_map': [ 'unordered_map' ],
-'unordered_set': [ 'unordered_set' ],
+'unordered_map': [ 'unordered_map', 'unordered_multimap' ],
+'unordered_set': [ 'unordered_set', 'unordered_multiset' ],
 'chrono' : [
     'chrono::duration',
     'chrono::system_clock',
