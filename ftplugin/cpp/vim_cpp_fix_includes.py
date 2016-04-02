@@ -156,14 +156,52 @@ _HEADER_TO_IDENTIFIER = {
     'cv_status',
     'notify_all_at_thread_exit',
 ],
+'boost/algorithm/string/trim.hpp': [
+    'boost::algorithm::trim_left_copy_if',
+    'boost::algorithm::trim_left_if ',
+    'boost::algorithm::trim_left_copy ',
+    'boost::algorithm::trim_left',
+    'boost::algorithm::trim_right_copy_if ',
+    'boost::algorithm::trim_right_if ',
+    'boost::algorithm::trim_right_copy ',
+    'boost::algorithm::trim_right',
+    'boost::algorithm::trim_copy_if ',
+    'boost::algorithm::trim_if ',
+    'boost::algorithm::trim_copy ',
+    'boost::algorithm::trim',
+],
+'boost/algorithm/string/predicate.hpp': [
+    'boost::algorithm::starts_with',
+    'boost::algorithm::istarts_with',
+    'boost::algorithm::ends_with',
+    'boost::algorithm::iends_with',
+    'boost::algorithm::contains',
+    'boost::algorithm::icontains',
+    'boost::algorithm::equals',
+    'boost::algorithm::iequals',
+    'boost::algorithm::lexicographical_compare',
+    'boost::algorithm::ilexicographical_compare',
+    'boost::algorithm::all',
+]
 }
 
 _NAME_TO_INCLUDE = {
     'boost::optional': 'boost/optional/optional.hpp',
     'boost::none': 'boost/none.hpp',
+
     'boost::lexical_cast': 'boost/lexical_cast.hpp',
+
     'BOOST_AUTO_TEST_SUITE': 'boost/test/unit_test.hpp',
     'BOOST_AUTO_TEST_CASE': 'boost/test/unit_test.hpp',
+
+    'boost::algorithm::all_of': 'boost/algorithm/cxx11/all_of.hpp',
+    'boost::algorithm::all_of_equal': 'boost/algorithm/cxx11/all_of.hpp',
+    'boost::algorithm::any_of': 'boost/algorithm/cxx11/any_of.hpp',
+    'boost::algorithm::any_of_equal': 'boost/algorithm/cxx11/any_of.hpp',
+    'boost::algorithm::none_of': 'boost/algorithm/cxx11/none_of.hpp',
+    'boost::algorithm::none_of_equal': 'boost/algorithm/cxx11/none_of.hpp',
+
+    'boost::format': 'boost/format.hpp',
 }
 
 def _get_visual_selection():
