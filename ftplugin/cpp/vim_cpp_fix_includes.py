@@ -59,8 +59,11 @@ _HEADER_TO_IDENTIFIER = {
     'equal_to', 'not_equal_to', 'less', 'greater', 'less_equal',
     'greater_equal', 'logical_and', 'logical_or', 'logical_not', 'binder1st',
     'bind1st', 'binder2nd', 'bind2nd', 'ptr_fun', 'pointer_to_unary_function',
-    'pointer_to_binary_function', 'not1', 'unary_negate', 'binary_negate', 'not2',
-    'mem_fun', 'mem_fun_ref', 'mem_fun1', 'mem_fun1_ref'
+    'pointer_to_binary_function', 'not1', 'unary_negate', 'binary_negate',
+    'not2', 'mem_fun', 'mem_fun_ref', 'mem_fun1', 'mem_fun1_ref',
+
+    'function', 'mem_fn', 'bad_function_call', 'is_bind_expression',
+    'is_placeholder', 'reference_wrapper', 'hash', 'bind', 'ref', 'cref'
 ],
 'iomanip': [ 'setw', 'setfill', 'hex', 'setprecision' ],
 'iostream': [ 'cin', 'cerr', 'cout', 'istream', 'ostream', 'endl', 'flush' ],
@@ -119,15 +122,88 @@ _HEADER_TO_IDENTIFIER = {
     'hours',
     'chrono::duration_cast',
     'duration_cast',
+],
+'mutex': [
+    'mutex',
+    'timed_mutex',
+    'recursive_mutex',
+    'recursive_timed_mutex',
+    'lock_guard',
+    'unique_lock',
+    'defer_lock_t',
+    'try_to_lock_t',
+    'adopt_lock_t',
+    'defer_lock',
+    'try_to_lock',
+    'adopt_lock',
+    'once_flag',
+    'try_lock',
+    'lock',
+    'call_once',
+],
+'thread' : [
+    'thread',
+    'this_thread::yield',
+    'this_thread::get_id',
+    'this_thread::sleep_for',
+    'this_thread::sleep_until',
+    'yield',
+    'get_id',
+    'sleep_for',
+    'sleep_until',
+],
+'condition_variable' : [
+    'condition_variable',
+    'condition_variable_any',
+    'cv_status',
+    'notify_all_at_thread_exit',
+],
+'boost/algorithm/string/trim.hpp': [
+    'boost::algorithm::trim_left_copy_if',
+    'boost::algorithm::trim_left_if ',
+    'boost::algorithm::trim_left_copy ',
+    'boost::algorithm::trim_left',
+    'boost::algorithm::trim_right_copy_if ',
+    'boost::algorithm::trim_right_if ',
+    'boost::algorithm::trim_right_copy ',
+    'boost::algorithm::trim_right',
+    'boost::algorithm::trim_copy_if ',
+    'boost::algorithm::trim_if ',
+    'boost::algorithm::trim_copy ',
+    'boost::algorithm::trim',
+],
+'boost/algorithm/string/predicate.hpp': [
+    'boost::algorithm::starts_with',
+    'boost::algorithm::istarts_with',
+    'boost::algorithm::ends_with',
+    'boost::algorithm::iends_with',
+    'boost::algorithm::contains',
+    'boost::algorithm::icontains',
+    'boost::algorithm::equals',
+    'boost::algorithm::iequals',
+    'boost::algorithm::lexicographical_compare',
+    'boost::algorithm::ilexicographical_compare',
+    'boost::algorithm::all',
 ]
 }
 
 _NAME_TO_INCLUDE = {
     'boost::optional': 'boost/optional/optional.hpp',
     'boost::none': 'boost/none.hpp',
+
     'boost::lexical_cast': 'boost/lexical_cast.hpp',
+
     'BOOST_AUTO_TEST_SUITE': 'boost/test/unit_test.hpp',
     'BOOST_AUTO_TEST_CASE': 'boost/test/unit_test.hpp',
+
+    'boost::algorithm::all_of': 'boost/algorithm/cxx11/all_of.hpp',
+    'boost::algorithm::all_of_equal': 'boost/algorithm/cxx11/all_of.hpp',
+    'boost::algorithm::any_of': 'boost/algorithm/cxx11/any_of.hpp',
+    'boost::algorithm::any_of_equal': 'boost/algorithm/cxx11/any_of.hpp',
+    'boost::algorithm::none_of': 'boost/algorithm/cxx11/none_of.hpp',
+    'boost::algorithm::none_of_equal': 'boost/algorithm/cxx11/none_of.hpp',
+
+    'boost::format': 'boost/format.hpp',
 }
 
 def _get_visual_selection():
