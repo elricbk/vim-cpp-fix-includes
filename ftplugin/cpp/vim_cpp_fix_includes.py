@@ -117,6 +117,8 @@ _HEADER_TO_IDENTIFIER = {
     'seconds',
     'minutes',
     'hours',
+    'chrono::duration_cast',
+    'duration_cast',
 ]
 }
 
